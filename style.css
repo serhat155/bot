@@ -1,4 +1,3 @@
-
 body {
   background: #111;
   color: #fff;
@@ -69,4 +68,41 @@ h1 {
   color: #fff;
   font-size: 14px;
   padding: 6px;
+}
+
+
+/* SLIDER - Kral Boyutu (215x322) */
+.swiper-slide {
+  width: 215px !important;
+  height: 322px !important;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1e1e1e;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-grow: 1;
+  border-bottom: 2px solid #e50914;
+}
+.swiper-slide h3 {
+  color: #fff;
+  font-size: 14px;
+  padding: 6px;
+  margin: 0;
+  background: #111;
+}
+
+
+/* SLIDER KUTUSU */
+.slider-container {
+  border: 2px solid #e50914;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 30px;
+  background: #1a1a1a;
 }
