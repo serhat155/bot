@@ -1,40 +1,80 @@
 
-/* GECE MODU MAVİ VURGULU */
-
 body {
-  background-color: #0d1117;
-  color: #ffffff;
-}
-
-header, .slider-container {
-  background-color: #161b22;
-}
-
-.izle-btn {
-  background-color: #3498db;
-}
-
-.izle-btn:hover {
-  background-color: #5dade2;
-}
-
-.filter-item select,
-.search-container input {
-  background-color: #1f2733;
+  background-color: #121212;
   color: #fff;
-  border: 1px solid #3498db;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
+  background-color: #1f1f1f;
+}
+
+.filter-item label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.filter-item select {
+  padding: 8px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.slider-container {
+  padding: 10px;
+}
+
+.swiper {
+  width: 100%;
+  padding: 10px 0;
 }
 
 .swiper-slide {
-  background: #1f2733;
+  width: 203px !important;
+  height: 303px;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.film-listesi {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 20px;
 }
 
 .film-kart {
-  background: #1e2a38;
-  border: 1px solid #2c3e50;
+  background-color: #1f1f1f;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #333;
 }
 
-.film-kart h3,
-.film-kart .imdb {
-  color: #ffffff;
+.film-kart img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.film-kart h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+.imdb {
+  font-size: 14px;
+  color: #f1c40f;
 }

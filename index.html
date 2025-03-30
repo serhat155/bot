@@ -1,49 +1,48 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🎬 Film Arşivi</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
 </head>
 <body>
-  <div class="container">
-    <h1>🎬 Film Arşivi</h1>
-    <div class="search-container">
-      <input type="text" id="film-ara" placeholder="🔍 Film ara...">
+
+  <div class="slider-container">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper" id="slider-filmler"></div>
     </div>
-    <div class="filter-container">
-      <label for="kategori-sec">🎭 Kategori Seçin:</label>
+  </div>
+
+  <div class="filters">
+    <div class="filter-item">
+      <label for="kategori-sec">🎬 Kategori Seçin:</label>
       <select id="kategori-sec">
-        <option value="hepsi">Tüm Filmler</option>
+        <option value="hepsi">Tümü</option>
+        <option value="Aksiyon">Aksiyon</option>
+        <option value="Komedi">Komedi</option>
+        <option value="Bilim Kurgu">Bilim Kurgu</option>
+        <option value="Macera">Macera</option>
+        <option value="Korku">Korku</option>
+        <option value="Dram">Dram</option>
+        <option value="Gerilim">Gerilim</option>
       </select>
     </div>
-
-    <!-- SLIDER -->
-    <div class="slider-container">
-  <div class="swiper mySwiper">
-      <div class="swiper-wrapper" id="slider-alani">
-        <!-- Slider kartları burada -->
-      </div>
-      <div class="swiper-pagination"></div>
-  </div>
-</div> <!-- slider-container -->
+    <div class="filter-item">
+      <label for="dil-sec">🎧 Ses Seçimi:</label>
+      <select id="dil-sec">
+        <option value="hepsi">Hepsi</option>
+        <option value="dublaj">Sadece Dublaj</option>
+        <option value="altyazi">Sadece Altyazı</option>
+      </select>
     </div>
-
-    <!-- Film listesi -->
-    <div id="film-listesi" class="film-grid">Yükleniyor...</div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <div class="film-listesi" id="film-listesi"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
-
-<!-- Lightbox İzleme Penceresi -->
-<div id="lightbox" class="lightbox">
-  <div class="lightbox-content">
-    <span class="lightbox-close" onclick="kapatLightbox()">&times;</span>
-    <iframe id="lightbox-player" src="" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div>
-
 </body>
 </html>
