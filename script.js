@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    const hedefJSON = "https://serhat155.github.io/bot/film_ornekleri.json";
+    const hedefJSON = "https://serhat155.github.io/bot/hdfilm_json_guncel.json";
     fetch(hedefJSON)
         .then(res => res.json())
         .then(veri => {
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(err => {
+            console.error(err);
             document.getElementById("film-listesi").innerHTML = "❌ Film verileri yüklenemedi.";
         });
 });
