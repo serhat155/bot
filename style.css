@@ -1,0 +1,47 @@
+
+body {
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  color: #e50914;
+}
+.film-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.film-kart {
+  background: #1e1e1e;
+  padding: 10px;
+  border-radius: 10px;
+  width: 180px;
+  text-align: center;
+  box-shadow: 0 0 10px #00000088;
+}
+.film-kart img {
+  width: 100%;
+  border-radius: 8px;
+}
+.film-kart h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+.film-kart .imdb, .film-kart .yil, .film-kart .tur {
+  font-size: 13px;
+  color: #ccc;
+}
+.izle-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #e50914;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
