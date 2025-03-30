@@ -45,3 +45,26 @@ h1 {
   text-decoration: none;
   border-radius: 4px;
 }
+
+/* SLIDER */
+.swiper {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+.swiper-slide {
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  text-align: center;
+}
+.swiper-slide img {
+  width: 100%;
+  border-bottom: 2px solid #e50914;
+}
+.swiper-slide h3 {
+  color: #fff;
+  font-size: 16px;
+  padding: 8px;
+}
