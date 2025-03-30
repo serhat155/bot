@@ -79,6 +79,30 @@ document.getElementById("kategori-sec").addEventListener("change", function () {
     kategoriFiltrele(this.value);
 });
 
+document.getElementById("kategori-sec").addEventListener("change", function () {
+    const kategori = this.value;
+    const filmler = document.querySelectorAll('.film-kart');
+    const filmAlani = document.getElementById("film-listesi");
+    const filmArray = Array.from(filmler);
+
+    // IMDb sıralı şekilde sırala (yüksekten düşüğe)
+    const sirali = filmArray.sort((a, b) => {
+        const imdbA = parseFloat(a.querySelector(".imdb").textContent.replace("⭐ IMDb: ", "")) || 0;
+        const imdbB = parseFloat(b.querySelector(".imdb").textContent.replace("⭐ IMDb: ", "")) || 0;
+        return imdbB - imdbA;
+    });
+
+    filmAlani.innerHTML = "";
+    sirali.forEach(kart => {
+        const kartTur = kart.getAttribute("data-tur") || "";
+        if (kategori === "hepsi" || kartTur.includes(kategori)) {
+            kart.style.display = "block";
+        } else {
+            kart.style.display = "none";
+        }
+        filmAlani.appendChild(kart);
+    });
+});
 
 document.getElementById("film-ara").addEventListener("input", function () {
     const kelime = this.value.toLowerCase();
@@ -87,3 +111,15 @@ document.getElementById("film-ara").addEventListener("input", function () {
         kart.style.display = metin.includes(kelime) ? "block" : "none";
     });
 });
+
+
+function acLightbox(videoUrl) {
+    const player = document.getElementById("lightbox-player");
+    player.src = videoUrl;
+    document.getElementById("lightbox").style.display = "block";
+}
+function kapatLightbox() {
+    const player = document.getElementById("lightbox-player");
+    player.src = "";
+    document.getElementById("lightbox").style.display = "none";
+}
