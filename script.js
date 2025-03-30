@@ -8,20 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
             const sliderAlani = document.getElementById("slider-alani");
             filmAlani.innerHTML = "";
 
-            // IMDb puanı 7.5 ve üzeri olanlar için slider
-            const populerler = veri.filter(f => parseFloat(f.imdb) >= 7.5);
-            populerler.forEach(film => {
-                const slide = document.createElement("div");
-                slide.classList.add("swiper-slide");
-                slide.innerHTML = `
-                    <img src="${film.poster}" alt="${film.baslik}">
-                    <h3>${film.baslik}</h3>
-                `;
-                sliderAlani.appendChild(slide);
-            });
-
-            // Ana film listesi
             veri.forEach(film => {
+                // IMDb puanı yüksek olanları slider'a da ekle
+                if (parseFloat(film.imdb) >= 7.5) {
+                    const slide = document.createElement("div");
+                    slide.classList.add("swiper-slide");
+                    slide.innerHTML = `
+                        <img src="${film.poster}" alt="${film.baslik}">
+                        <h3>${film.baslik}</h3>
+                    `;
+                    sliderAlani.appendChild(slide);
+                }
+
+                // Tüm filmleri listeye ekle
                 const kart = document.createElement("div");
                 kart.classList.add("film-kart");
                 kart.innerHTML = `
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <h3>${film.baslik}</h3>
                     <div class="imdb">⭐ IMDb: ${film.imdb}</div>
                     <div class="yil">📅 Yıl: ${film.yil}</div>
-                    <div class="tur">🎭 Tür: ${film.tur}</div>
+                    <div class="tur">🎭 Tür: ${film.tur ? film.tur : "Bilinmiyor"}</div>
                     <a class="izle-btn" href="${film.video}" target="_blank">İzle</a>
                 `;
                 filmAlani.appendChild(kart);
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             new Swiper(".mySwiper", {
                 slidesPerView: "auto",
-                spaceBetween: 15,
+                spaceBetween: 10,
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
