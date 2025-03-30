@@ -2,10 +2,20 @@
 const jsonURL = "https://raw.githubusercontent.com/Serhat155/bot/main/hdfilm_json_guncel.json";
 
 fetch(jsonURL)
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("JSON verisi çekilemedi");
+    return res.json();
+  })
   .then(data => {
     const filmAlani = document.getElementById("film-listesi");
     const sliderAlani = document.getElementById("slider-filmler");
+
+    if (!filmAlani || !sliderAlani) {
+      console.error("Film veya slider alanı bulunamadı!");
+      return;
+    }
+
+    sliderAlani.style.border = "3px dashed red"; // görsel olarak işaretle
 
     const sirali = data.sort((a, b) => parseFloat(b.imdb) - parseFloat(a.imdb));
 
@@ -22,7 +32,7 @@ fetch(jsonURL)
       `;
       filmAlani.appendChild(kart);
 
-      if (parseFloat(film.imdb) >= 7.0) {
+      if (parseFloat(film.imdb) >= 5.0) {
         const slide = document.createElement("div");
         slide.className = "swiper-slide";
         slide.innerHTML = `<img src="${film.poster}" alt="${film.title}" style="width:100%">`;
@@ -42,6 +52,13 @@ fetch(jsonURL)
 
     document.getElementById("kategori-sec").addEventListener("change", uygulaFiltreler);
     document.getElementById("dil-sec").addEventListener("change", uygulaFiltreler);
+  })
+  .catch(err => {
+    console.error("Film verileri yüklenemedi:", err);
+    const filmAlani = document.getElementById("film-listesi");
+    if (filmAlani) {
+      filmAlani.innerHTML = "<div style='color:red; font-size:18px;'>❌ Film verisi çekilemedi. Konsolu kontrol edin.</div>";
+    }
   });
 
 function uygulaFiltreler() {
