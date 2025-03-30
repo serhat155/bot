@@ -1,5 +1,5 @@
 
-const jsonURL = "https://serhat155.github.io/bot/hdfilm_json_guncel.json";
+const jsonURL = "https://raw.githubusercontent.com/Serhat155/bot/main/hdfilm_json_guncel.json";
 
 fetch(jsonURL)
   .then(res => res.json())
