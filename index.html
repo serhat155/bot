@@ -2,51 +2,29 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎬 Film Arşivi</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <meta charset="UTF-8">
+  <title>Film Arşivi</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <h1>🎬 IMDb 5+ Film Arşivi (Lightbox + Slayt)</h1>
 
-  <div class="slider-container">
-    
-    <div class="swiper mySwiper">
-      
-      
-    
-      <div class="swiper-wrapper" id="slider-filmler"></div>
+  <!-- Slayt Alanı -->
+  <div class="slayt-wrapper">
+    <div id="slayt-alani" class="slayt-alani"></div>
+  </div>
+
+  <!-- Film Listesi -->
+  <div id="film-listesi" class="film-grid"></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox-player" class="lightbox-player">
+    <div class="lightbox-content">
+      <span id="lightbox-close" class="lightbox-close">&times;</span>
+      <iframe id="lightbox-iframe" src="" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 
-  <div class="filters">
-    <div class="filter-item">
-      <label for="kategori-sec">🎬 Kategori Seçin:</label>
-      <select id="kategori-sec">
-        <option value="hepsi">Tümü</option>
-        <option value="Aksiyon">Aksiyon</option>
-        <option value="Komedi">Komedi</option>
-        <option value="Bilim Kurgu">Bilim Kurgu</option>
-        <option value="Macera">Macera</option>
-        <option value="Korku">Korku</option>
-        <option value="Dram">Dram</option>
-        <option value="Gerilim">Gerilim</option>
-      </select>
-    </div>
-    <div class="filter-item">
-      <label for="dil-sec">🎧 Ses Seçimi:</label>
-      <select id="dil-sec">
-        <option value="hepsi">Hepsi</option>
-        <option value="dublaj">Sadece Dublaj</option>
-        <option value="altyazi">Sadece Altyazı</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="film-listesi" id="film-listesi"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

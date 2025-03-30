@@ -1,93 +1,46 @@
 
-const jsonURL = "https://raw.githubusercontent.com/Serhat155/bot/main/hdfilm_json_guncel.json";
+const JSON_URL = "https://serhat155.github.io/bot/hdfilm_json_guncel.json";
 
-fetch(jsonURL)
-  .then(res => {
-    if (!res.ok) throw new Error("JSON verisi çekilemedi");
-    return res.json();
-  })
+fetch(JSON_URL)
+  .then(res => res.json())
   .then(data => {
-    const filmAlani = document.getElementById("film-listesi");
-    const sliderAlani = document.getElementById("slider-filmler");
+    const filmListesi = document.getElementById("film-listesi");
+    const slaytAlani = document.getElementById("slayt-alani");
 
-    if (!filmAlani || !sliderAlani) {
-      console.error("Film veya slider alanı bulunamadı!");
-      return;
-    }
-
-    sliderAlani.style.border = "3px dashed red"; // görsel olarak işaretle
-
-    const sirali = data.sort((a, b) => parseFloat(b.imdb) - parseFloat(a.imdb));
-
-    sirali.forEach(film => {
+    data.forEach(film => {
       const kart = document.createElement("div");
       kart.className = "film-kart";
-      kart.setAttribute("data-tur", film.tur || "");
-      kart.setAttribute("data-dil", film.dil || "");
-
       kart.innerHTML = `
-        <img src="${film.poster}" alt="${film.title}" />
-        <h3>${film.title}</h3>
+        <img src="${film.poster}" alt="${film.baslik}">
+        <h3>${film.baslik}</h3>
+        <div class="orjinal">🌍 ${film.orjinal || ""}</div>
         <div class="imdb">⭐ IMDb: ${film.imdb}</div>
+        <div class="yil">📅 Yıl: ${film.yil || "Bilinmiyor"}</div>
+        <div class="tur">🎭 Tür: ${film.kategori || "Bilinmiyor"}</div>
+        <button class="watch-btn" data-video="${film.link}">İzle</button>
       `;
-      filmAlani.appendChild(kart);
+      filmListesi.appendChild(kart);
 
       if (parseFloat(film.imdb) >= 5.0) {
-        const slide = document.createElement("div");
-        slide.className = "swiper-slide";
-        slide.innerHTML = `<img src="${film.poster}" alt="${film.title}" style="width:100%">`;
-        sliderAlani.appendChild(slide);
+        const img = document.createElement("img");
+        img.src = film.poster;
+        img.alt = film.baslik;
+        slaytAlani.appendChild(img);
       }
     });
-
-    new Swiper(".mySwiper", {
-      slidesPerView: 5,
-      spaceBetween: 10,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
-      loop: true,
-    });
-
-    document.getElementById("kategori-sec").addEventListener("change", uygulaFiltreler);
-    document.getElementById("dil-sec").addEventListener("change", uygulaFiltreler);
-  })
-  .catch(err => {
-    console.error("Film verileri yüklenemedi:", err);
-    const filmAlani = document.getElementById("film-listesi");
-    if (filmAlani) {
-      filmAlani.innerHTML = "<div style='color:red; font-size:18px;'>❌ Film verisi çekilemedi. Konsolu kontrol edin.</div>";
-    }
   });
 
-function uygulaFiltreler() {
-  const kategori = document.getElementById("kategori-sec").value.toLowerCase();
-  const secilenDil = document.getElementById("dil-sec").value.toLowerCase();
-  const filmler = document.querySelectorAll(".film-kart");
-  const filmAlani = document.getElementById("film-listesi");
+// Lightbox Aç
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("watch-btn")) {
+    const videoURL = e.target.getAttribute("data-video");
+    document.getElementById("lightbox-iframe").src = videoURL;
+    document.getElementById("lightbox-player").style.display = "block";
+  }
+});
 
-  const sirali = Array.from(filmler).sort((a, b) => {
-    const imdbA = parseFloat(a.querySelector(".imdb").textContent.replace("⭐ IMDb: ", "")) || 0;
-    const imdbB = parseFloat(b.querySelector(".imdb").textContent.replace("⭐ IMDb: ", "")) || 0;
-    return imdbB - imdbA;
-  });
-
-  filmAlani.innerHTML = "";
-  sirali.forEach(kart => {
-    const kartTur = kart.getAttribute("data-tur").toLowerCase();
-    const kartDil = kart.getAttribute("data-dil").toLowerCase();
-    const kategoriUyar = kategori === "hepsi" || kartTur.includes(kategori);
-    const dilUyar =
-      secilenDil === "hepsi" ||
-      (secilenDil === "dublaj" && kartDil.includes("dublaj")) ||
-      (secilenDil === "altyazi" && kartDil.includes("altyazı"));
-
-    if (kategoriUyar && dilUyar) {
-      kart.style.display = "block";
-    } else {
-      kart.style.display = "none";
-    }
-    filmAlani.appendChild(kart);
-  });
-}
+// Lightbox Kapat
+document.getElementById("lightbox-close").addEventListener("click", function () {
+  document.getElementById("lightbox-iframe").src = "";
+  document.getElementById("lightbox-player").style.display = "none";
+});
