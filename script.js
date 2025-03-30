@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Tüm filmleri listeye ekle
                 const kart = document.createElement("div");
+                kart.setAttribute("data-tur", film.tur || "");
                 kart.classList.add("film-kart");
                 kart.innerHTML = `
                     <img src="${film.poster}" alt="${film.baslik}">
@@ -32,6 +33,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     <a class="izle-btn" href="${film.video}" target="_blank">İzle</a>
                 `;
                 filmAlani.appendChild(kart);
+            
+            // Kategorileri select'e ekle
+            const select = document.getElementById("kategori-sec");
+            if (film.tur) {
+                const turler = film.tur.split(",").map(t => t.trim());
+                turler.forEach(tur => {
+                    if (![...select.options].some(opt => opt.value === tur)) {
+                        const opt = document.createElement("option");
+                        opt.value = tur;
+                        opt.textContent = tur;
+                        select.appendChild(opt);
+                    }
+                });
+            }
             });
 
             new Swiper(".mySwiper", {
@@ -47,4 +62,28 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error(err);
             document.getElementById("film-listesi").innerHTML = "❌ Film verileri yüklenemedi.";
         });
+});
+
+
+function kategoriFiltrele(kategori) {
+    document.querySelectorAll('.film-kart').forEach(kart => {
+        const kartTur = kart.getAttribute('data-tur') || "";
+        if (kategori === "hepsi" || kartTur.includes(kategori)) {
+            kart.style.display = "block";
+        } else {
+            kart.style.display = "none";
+        }
+    });
+}
+document.getElementById("kategori-sec").addEventListener("change", function () {
+    kategoriFiltrele(this.value);
+});
+
+
+document.getElementById("film-ara").addEventListener("input", function () {
+    const kelime = this.value.toLowerCase();
+    document.querySelectorAll('.film-kart').forEach(kart => {
+        const metin = kart.textContent.toLowerCase();
+        kart.style.display = metin.includes(kelime) ? "block" : "none";
+    });
 });

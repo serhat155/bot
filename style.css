@@ -106,3 +106,33 @@ h1 {
   margin-bottom: 30px;
   background: #1a1a1a;
 }
+
+
+.filter-container {
+  margin: 20px 0;
+}
+.filter-container label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.filter-container select {
+  padding: 6px 10px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+
+.search-container {
+  margin: 20px 0;
+}
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 16px;
+}
